@@ -1,25 +1,27 @@
 library(shiny)
 
-# Define UI for application that draws a histogram
+airpollutiondata_clean <- read_excel("~/air-pollution-trends/airpollutiondata-clean.xlsx")
+
 fluidPage(
   
-  #Application title
-  titlePanel("Particulate Matter Data"),
-  
-  #Sidebar with a slider input for number of bins
+  titlePanel("Air Pollution Info"),
   sidebarLayout(
+    # Panel with widgets
     sidebarPanel(
-      sliderInput("bins",
-                  "Number of bins:",
-                  min = 1,
-                  max = 600,
-                  value = 200)
+      selectInput(inputId = 'Country',
+                  label   = 'Select a Country',
+                  choices = unique(airpollutiondata_clean$Country)
+        
+      ),
+    uiOutput(outputId = "select_value")
     ),
     
-    # Show a plot of the generated distribution
+    # Panel plot
     mainPanel(
-      plotOutput("distPlot")
+      plotOutput('Pollution_Plot')
+      
     )
+    
   )
+  
 )
-

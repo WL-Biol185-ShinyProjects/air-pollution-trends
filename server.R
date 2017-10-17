@@ -1,17 +1,26 @@
 library(shiny)
+library(tidyverse)
+library(ggplot2)
+library(readxl)
 
-# Define server logic required to draw a histogram
+airpollutiondata_clean <- read_excel("~/air-pollution-trends/airpollutiondata-clean.xlsx")
+
 function(input, output) {
   
-  output$distPlot <- renderPlot({
+  output$Pollution_Plot <- renderPlot({
     
-    # generate bins based on input$bins from ui.R
-    x    <- airpollutiondata_clean[, 2] 
-    bins <- seq(min(x), max(x), length.out = input$bins + 1)
-    
-    # draw the histogram with the specified number of bins
-    hist(x, breaks = bins, col = 'darkgray', border = 'white')
+    airpollutiondata_clean %>%
+      filter(Country == input$Country) %>%
+      ggplot(aes(`City/Town`, `Annual mean, ug/m3, PM2.5`)) + 
+      geom_bar(stat = "identity") +
+      theme(axis.text.x = element_text(angle = 60, hjust = 1))
+  
     
   })
   
+  output$select_value <- renderUI({
+    selectInput(inputId = 'Region',
+                label   = 'Select a Region',
+                choices = unique(airpollutiondata_clean$Region))
+  })
 }
