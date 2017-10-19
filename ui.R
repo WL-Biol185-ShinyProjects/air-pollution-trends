@@ -8,9 +8,9 @@ fluidPage(
   sidebarLayout(
     # Panel with widgets
     sidebarPanel(
-      selectInput(inputId = 'Country',
-                  label   = 'Select a Country',
-                  choices = unique(airpollutiondata_clean$Country)
+      selectInput(inputId = 'Region',
+                  label   = 'Select a Region',
+                  choices = unique(airpollutiondata_clean$Region)
         
       ),
     uiOutput(outputId = "select_value")
