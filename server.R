@@ -12,9 +12,8 @@ function(input, output) {
     airpollutiondata_clean %>%
       filter(Country == input$Country, Region == input$Region) %>%
       ggplot(aes(`City/Town`, `Annual mean, ug/m3, PM2.5`)) + 
-      geom_bar(stat = "identity") +
-      theme(axis.text.x = element_text(angle = 45, hjust = 1))
-  
+      geom_bar(stat = "identity", color = 'lawngreen') +
+      theme(axis.text.x = element_text(angle = 45, hjust = 1)) 
     
   })
   
@@ -28,3 +27,4 @@ function(input, output) {
   })
   
 }
+
