@@ -1,6 +1,6 @@
 library(shiny)
 
-airpollutiondata_clean <- read_excel("~/air-pollution-trends/airpollutiondata-clean.xlsx")
+CountryDataClean <- read_excel("~/air-pollution-trends/CountryDataClean.xls")
 
 fluidPage(
   
@@ -10,7 +10,8 @@ fluidPage(
     sidebarPanel(
       selectInput(inputId = 'Region',
                   label   = 'Select a Region',
-                  choices = unique(airpollutiondata_clean$Region)
+                  choices = unique(CountryDataClean$Region),
+                  multiple = TRUE
         
       ),
     uiOutput(outputId = "select_value")
