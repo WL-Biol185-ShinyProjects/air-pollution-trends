@@ -52,11 +52,31 @@ function(input, output) {
                 selected = "Africa",
                 multiple = TRUE)
   })
-}
+
   
  
+#Heatmap for Mortality Incidence by Country, from Years 2000:2015
+
+  output$Map_Mortality <- renderLeaflet({
+    
 
 
+Mortality_Filtered <- Total_Mortality_Data %>% 
+  filter_(Year == input$Year) %>% 
+  gather(`statistic`, `incidence`, 4:11) %>% 
+  filter_("statistic" == input$statistic)
+countryGEO@data <- countryGEO@data %>%
+  left_join(Mortality_Filtered, by = c("name" = "Name"))
+
+pal <- colorNumeric("YlOrRd", c(0, 1247))
+leaflet(data = countryGEO) %>%
+  addTiles() %>%
+  addPolygons(
+    fillColor = ~pal(incidence)
+  )
+  })
+
+}
 
 
 
