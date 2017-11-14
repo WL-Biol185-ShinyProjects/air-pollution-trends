@@ -12,7 +12,7 @@ dashboardPage(skin = "green",
     sidebarMenu(
       menuItem("Home", tabName = "home"),
       menuItem("Air Pollution Plots", tabName = "air-pollution-plots"),
-      menuItem("Respiratory Illness Heat Map", tabName = "Mortality Heat Map"),
+      menuItem("Mortaility Heat Map", tabName = "Mortality-Heat-Map"),
       menuItem("City Heat Map", tabName = "city-heat-map"),
       menuItem("Country Heat Map", tabName = "country-heat-map")
     )
@@ -52,7 +52,7 @@ dashboardPage(skin = "green",
                     )
   )))
       ),
-      tabItem(tabName = "Mortality Heat Map",
+      tabItem(tabName = "Mortality-Heat-Map",
           fluidPage(
             titlePanel("Mortality Heat Map"),
           leafletOutput("Map_Mortality"), p(), actionButton("recalc", ""))

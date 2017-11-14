@@ -62,9 +62,9 @@ function(input, output) {
 
 
 Mortality_Filtered <- Total_Mortality_Data %>% 
-  filter_(Year == input$Year) %>% 
+  filter_("Year" %in% input$Year) %>% 
   gather(`statistic`, `incidence`, 4:11) %>% 
-  filter_("statistic" == input$statistic)
+  filter_("statistic" %in% input$statistic)
 countryGEO@data <- countryGEO@data %>%
   left_join(Mortality_Filtered, by = c("name" = "Name"))
 
