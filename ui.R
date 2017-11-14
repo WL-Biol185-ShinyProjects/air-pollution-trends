@@ -12,9 +12,9 @@ dashboardPage(skin = "green",
     sidebarMenu(
       menuItem("Home", tabName = "home"),
       menuItem("Air Pollution Plots", tabName = "air-pollution-plots"),
-      menuItem("Country Heat Map", tabName = "country-heat-map"),
+      menuItem("Respiratory Illness Heat Map", tabName = "respiratory-illness-heat-map"),
       menuItem("City Heat Map", tabName = "city-heat-map"),
-      menuItem("Respiratory Illness Heat Map", tabName = "respiratory-illness-heat-map")
+      menuItem("Country Heat Map", tabName = "country-heat-map")
     )
   ),
   dashboardBody(
@@ -46,6 +46,14 @@ dashboardPage(skin = "green",
                     tabPanel("PM 10 Air Pollution Bar Plot",
                     plotOutput("Pollution_Plot2", width = 800, height = 400)
      
-                ))))
+                          )
+                        )
+                      )
+                    )
   )))
+      ),
+      tabItem(tabName = "Mortality Heat Map",
+          fluidPage(
+            titlePanel("Mortality Heat Map"),
+          leafletOutput("map"), p(), actionButton("recalc", ""))
 ))))
