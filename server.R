@@ -5,7 +5,7 @@ library(readxl)
 
 CountryDataClean <- read_excel("~/air-pollution-trends/CountryDataClean.xls")
 region <- read_excel("~/air-pollution-trends/CountryDataClean.xls")
- 
+countryGEO <- rgdal:: readOGR("countries.geo.json", "OGRGeoJSON")
 
 
 function(input, output) {
