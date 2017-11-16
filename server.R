@@ -7,6 +7,7 @@ CountryDataClean <- read_excel("~/air-pollution-trends/CountryDataClean.xls")
 region <- read_excel("~/air-pollution-trends/CountryDataClean.xls")
 
 
+
 function(input, output) {
   
   output$Pollution_Plot <- renderPlot({

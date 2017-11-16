@@ -55,5 +55,8 @@ dashboardPage(skin = "green",
       tabItem(tabName = "Mortality-Heat-Map",
           fluidPage(
             titlePanel("Mortality Heat Map"),
-          leafletOutput("Map_Mortality"), p(), actionButton("recalc", ""))
-))))
+          leafletOutput("Map_Mortality")
+)))))
+
+
+
