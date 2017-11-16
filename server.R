@@ -75,7 +75,10 @@ leaflet(data = countryGEO) %>%
   addTiles() %>%
   addPolygons(
     fillColor = ~pal(incidence)
-  )
+    , weight = 1
+    , opacity = 0.1
+    , fillOpacity = 0.1
+  ) 
   })
 
 }
