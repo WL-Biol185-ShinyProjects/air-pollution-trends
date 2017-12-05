@@ -3,6 +3,7 @@ library(leaflet)
 library(shinythemes)
 library(shinydashboard)
 library(htmltools)
+
 CountryDataClean <- read_excel("~/air-pollution-trends/CountryDataClean.xls")
 
 
@@ -22,6 +23,10 @@ dashboardPage(skin = "green",
       tabItem(tabName = "home",
               fluidPage(
                 titlePanel("World Air Pollution and Respiratory Illness Trends"),
+                img(src = "airpollution.jpg",
+                    height = 250,
+                    width = 250,
+                    align = "center"),
                 tags$b(),
                 h3("Welcome to our Air Pollution Trend application!"),
                   tags$br(),
@@ -70,24 +75,24 @@ dashboardPage(skin = "green",
       
       tabItem(tabName = "air-pollution-plots",
               fluidRow(
-                box(position = "above", selectInput(inputId = 'firstRegion',
+                box(position = "above", width = 12, selectInput(inputId = 'firstRegion',
                                 label   = 'Select a Region',
                                 choices = unique(CountryDataClean$Region),
                                 multiple = TRUE),
                     uiOutput(outputId = "select_value"),
-              tabBox(width = 10,
+               
                      tabPanel("PM 2.5 Air Pollution Bar Plot",    
-                    plotOutput("Pollution_Plot", width = 800, height = 400),
+                    plotOutput("Pollution_Plot"),
                   
               
-                 box(position = "below", selectInput(inputId = 'secondRegion',
+                 box(position = "below", width = 20, selectInput(inputId = 'secondRegion',
                                   label   = 'Select a Region',
                                   choices = unique(CountryDataClean$Region),
                                   multiple = TRUE),
                     uiOutput(outputId = "select_values"),
-              tabBox(width = 20,
+                  
                      tabPanel("PM 10 Air Pollution Bar Plot",
-                    plotOutput("Pollution_Plot2", width = 800, height = 400)
+                    plotOutput("Pollution_Plot2")
                 
                   ) 
                 ) 
@@ -95,9 +100,9 @@ dashboardPage(skin = "green",
           )  
        
      
-  )))
+  )
   ),
-      
+    
       tabItem(tabName = "Mortality-Heat-Map",
           fluidPage(
             sliderInput(inputId ="Year",
@@ -122,6 +127,5 @@ dashboardPage(skin = "green",
           )    
         )
       )  
-)
-)
+))
 
