@@ -61,26 +61,17 @@ function(input, output) {
 
   output$Map_Mortality <- renderLeaflet({
     
+    
 
-
-<<<<<<< HEAD
-Mortality_Filtered2 <- Total_Mortality_Data %>% 
-
-  gather('statistic', 'incidence', 4:11) %>%
-  filter_("statistic" %in% input$statistic)
-=======
 Mortality_Filtered <- Total_Mortality_Data %>% 
   filter_("Year" %in% input$Year) %>% 
   gather(`statistic`, `incidence`, 4:11) %>% 
   filter_('statistic' %in% input$statistic)
->>>>>>> 084ab7e58b84629732b978bbdfc15e96ba93a408
-
 
 countryGEO@data <- countryGEO@data %>%
-  left_join(Mortality_Filtered2, by = c("name" = "Name"))
+  left_join(Mortality_Filtered, by = c("name" = "Name"))
 
 pal <- colorNumeric("YlOrRd", c(0,1247))
-
 leaflet(data = countryGEO) %>%
   addTiles(options = tileOptions(noWrap = TRUE)) %>%
   addPolygons(
@@ -88,17 +79,12 @@ leaflet(data = countryGEO) %>%
     , weight = 5
     , opacity = 0.1
     , fillOpacity = 0.8
-<<<<<<< HEAD
   ) 
 
   })
 
-=======
-   ) 
-  }
- )
->>>>>>> 084ab7e58b84629732b978bbdfc15e96ba93a408
 }
+
 
 
 
