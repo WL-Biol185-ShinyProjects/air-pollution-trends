@@ -22,18 +22,6 @@ dashboardPage(skin = "green",
       tabItem(tabName = "home",
               fluidPage(
                 titlePanel("World Air Pollution and Respiratory Illness Trends"),
-<<<<<<< HEAD
-                h5("Welcome to our webpage.")
-              )
-              ),
-      
-      tabItem(tabName = "background",
-              fluidPage(
-                titlePanel("Some background information on our project"),
-                h5("djasjdjasjdja")
-              )
-              ),
-=======
                 tags$b(),
                 h3("Welcome to our Air Pollution Trend application!"),
                   tags$br(),
@@ -79,7 +67,6 @@ dashboardPage(skin = "green",
                    tags$a(href = "https://www.environmentalpollutioncenters.org/air/diseases/", "3. Environmental Pollution Centers - Air Pollution Diseases!")
                    )
               )),
->>>>>>> 4a0fa465b6493030e3ba7627eb134f0d48f95d33
       
       tabItem(tabName = "air-pollution-plots",
               fluidRow(
