@@ -71,9 +71,9 @@ Mortality_Filtered <- Total_Mortality_Data %>%
 countryGEO@data <- countryGEO@data %>%
   left_join(Mortality_Filtered, by = c("name" = "Name"))
 
-pal <- colorNumeric("YlOrRd", c(0,1247))
+pal <- colorNumeric("YlOrRd", c(0, 1247))
 leaflet(data = countryGEO) %>%
-  addTiles(options = tileOptions(noWrap = TRUE)) %>%
+  addTiles() %>%
   addPolygons(
     fillColor = ~pal(incidence)
     , weight = 5
