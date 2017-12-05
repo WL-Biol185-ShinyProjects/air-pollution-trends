@@ -64,7 +64,7 @@ dashboardPage(skin = "green",
                    tags$br(),
                    tags$a(href = "http://www.who.int/topics/air_pollution/en/", "2. World Health Organization Air Pollution"),
                    tags$br(),
-                   tags$a(href = "https://www.environmentalpollutioncenters.org/air/diseases/", "3. Environmental Pollution Centers - Air Pollution Diseases")
+                   tags$a(href = "https://www.environmentalpollutioncenters.org/air/diseases/", "3. Environmental Pollution Centers - Air Pollution Diseases!")
                    )
               )),
       
