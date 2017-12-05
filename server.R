@@ -66,22 +66,22 @@ function(input, output) {
 Mortality_Filtered <- Total_Mortality_Data %>% 
   filter_("Year" %in% input$Year) %>% 
   gather(`statistic`, `incidence`, 4:11) %>% 
-  filter_("statistic" %in% input$statistic)
+  filter_('statistic' %in% input$statistic)
 
 countryGEO@data <- countryGEO@data %>%
   left_join(Mortality_Filtered, by = c("name" = "Name"))
 
 pal <- colorNumeric("YlOrRd", c(0, 1247))
 leaflet(data = countryGEO) %>%
-  addTiles() %>%
+  addTiles(options = tileOptions(noWrap = TRUE)) %>%
   addPolygons(
     fillColor = ~pal(incidence)
     , weight = 1
     , opacity = 0.1
     , fillOpacity = 0.8
-  ) 
-  })
-
+   ) 
+  }
+ )
 }
 
 

@@ -11,10 +11,10 @@ dashboardPage(skin = "green",
   dashboardSidebar(
     sidebarMenu(
       menuItem("Home", tabName = "home"),
-      menuItem("Air Pollution Plots", tabName = "air-pollution-plots"),
+      menuItem("Background", tabName = "background"),
+      menuItem("Air Pollution Plots", tabName = "air-pollution-plots" ),
       menuItem("Mortaility Heat Map", tabName = "Mortality-Heat-Map"),
-      menuItem("City Heat Map", tabName = "city-heat-map"),
-      menuItem("Country Heat Map", tabName = "country-heat-map")
+      menuItem("Sources", tabName = "sources")
     )
   ),
   dashboardBody(
@@ -23,6 +23,12 @@ dashboardPage(skin = "green",
               fluidPage(
                 titlePanel("World Air Pollution and Respiratory Illness Trends"),
                 h5("Welcome to our webpage.")
+              )),
+      
+      tabItem(tabName = "background",
+              fluidPage(
+                titlePanel("Some background information on our project"),
+                h5("djasjdjasjdja")
               )),
       
       tabItem(tabName = "air-pollution-plots",
@@ -54,9 +60,29 @@ dashboardPage(skin = "green",
       ),
       tabItem(tabName = "Mortality-Heat-Map",
           fluidPage(
+            sliderInput(inputId ="Year",
+                        label = "Year",
+                        value = 2000,
+                        min = 2000,
+                        max = 2015,
+                        step = 5,
+                        animate = TRUE),
             titlePanel("Mortality Heat Map"),
           leafletOutput("Map_Mortality", width = 1000, height = 1000)
-)))))
+)),
 
+      tabItem(tabName = "sources",
+          fluidPage(
+            titlePanel("Sources"),
+            h5("asdjak")
+            
+          )    
+        )
+    )
 
+     
+
+))
+
+     
 
