@@ -84,7 +84,8 @@ countryGEO@data <- countryGEO@data %>%
 
 pal <- colorNumeric("YlOrRd", c(0, 1247))
 leaflet(data = countryGEO) %>%
-  addTiles() %>%
+  addTiles(options = tileOptions(noWrap = TRUE)) %>%
+  setView( lng = 0, lat = 0, zoom = 2) %>%
   addPolygons(
     fillColor = ~pal(incidence)
     , weight = 5
