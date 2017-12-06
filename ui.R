@@ -13,6 +13,7 @@ dashboardPage(skin = "green",
       menuItem("Home", tabName = "home"),
       menuItem("Background", tabName = "background"),
       menuItem("Air Pollution Plots", tabName = "air-pollution-plots" ),
+      menuItem("Table and Chart with City Pollution", tabName = "cityplots"),
       menuItem("Mortaility Heat Map", tabName = "Mortality-Heat-Map"),
       menuItem("Sources", tabName = "sources")
     )
@@ -97,7 +98,21 @@ dashboardPage(skin = "green",
      
   )))
   ),
-      
+      tabItem(tabName = "cityplots",
+              fluidPage(
+                box(width = 12, 
+                    checkboxGroupInput("region",
+                                       label = "Region",
+                                       choices = unique(airpollutiondata_clean$Region),
+                                       selected = "AMR HI")),
+                box(width = 12,
+                    strong("Plot of PM10 for Cities within Countries"),
+                    plotOutput("`country-city-plot`")),
+                box(width = 12,
+                    strong("Output Table of Data"),
+                    dataTableOutput("`country-city-table`"))
+              )),
+  
       tabItem(tabName = "Mortality-Heat-Map",
           fluidPage(
             sliderInput(inputId ="Year",
