@@ -24,9 +24,9 @@ dashboardPage(skin = "green",
       tabItem(tabName = "home",
               fluidPage(
                 titlePanel("World Air Pollution and Respiratory Illness Trends"),
-                img(src = "airpollution.jpg",
-                    height = 250,
-                    width = 250,
+                img(src = "airpollution.png",
+                    height = 300,
+                    width = 400,
                     align = "center"),
                 tags$b(),
                 h3("Welcome to our Air Pollution Trend application!"),
@@ -112,10 +112,10 @@ dashboardPage(skin = "green",
                                        selected = "AMR HI")),
                 box(width = 12,
                     strong("Plot of PM10 for Cities within Countries"),
-                    plotOutput("`country-city-plot`")),
+                    plotOutput("country_city_plot")),
                 box(width = 12,
                     strong("Output Table of Data"),
-                    dataTableOutput("`country-city-table`"))
+                    dataTableOutput("country_city_table"))
               )),
   
       tabItem(tabName = "Mortality-Heat-Map",
@@ -127,6 +127,11 @@ dashboardPage(skin = "green",
                         max = 2015,
                         step = 5,
                         animate = TRUE),
+            selectInput(inputId = "statistic",
+                        choices = colnames(Total_Mortality_Data)[4:11],
+                        label = "Select a cause of Mortality"),
+            
+            
             titlePanel("Mortality Heat Map"),
           leafletOutput("Map_Mortality", width = 1000, height = 1000)
 ) ),
