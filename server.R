@@ -2,12 +2,10 @@ library(shiny)
 library(tidyverse)
 library(ggplot2)
 library(readxl)
-library(dplyr)
 
 CountryDataClean <- read_excel("~/air-pollution-trends/CountryDataClean.xls")
 region <- read_excel("~/air-pollution-trends/CountryDataClean.xls")
 countryGEO <- rgdal:: readOGR("countries.geo.json", "OGRGeoJSON")
-airpollutiondata_clean <- read_excel("~/air-pollution-trends/airpollutiondata-clean.xlsx")
 
 
 function(input, output) {
@@ -56,17 +54,7 @@ function(input, output) {
                 multiple = TRUE)
   })
 
-#Plot with City Data and Table
-  output$`country-city-plot` <- renderPlot({
-    airpollutiondata_clean %>%
-      filter(Region %in% input$region) %>%
-      ggplot(aes(Country, `Annual mean ug/m3, PM10`, color = Region)) + geom_point()
-  })
   
-  output$`country-city-table` <- renderDataTable({
-    airpollutiondata_clean %>%
-      filter(Region %in% input$region)
-  })
  
 #Heatmap for Mortality Incidence by Country, from Years 2000:2015
 
@@ -94,7 +82,6 @@ leaflet(data = countryGEO) %>%
   ) 
 
   })
-
 
 }
 
