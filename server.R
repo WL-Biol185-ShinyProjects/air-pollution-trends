@@ -66,7 +66,9 @@ function(input, output) {
   output$country_city_plot <- renderPlot({
     airpollutiondata_clean %>%
       filterIn("Region", input$region) %>%
-      ggplot(aes(Country, `Annual mean ug/m3, PM10`, color = Region)) + geom_point()
+      ggplot(aes(Country, `Annual mean ug/m3, PM10`, color = Region)) + geom_point() +
+      theme(text = element_text(size =20),
+            axis.text.x = element_text(angle = 45, hjust = 1, size = 15)) 
   })
   
   output$country_city_table <- renderDataTable({
@@ -84,8 +86,6 @@ leaflet(data = countryGEO) %>%
   })
 
 observe({
-  print(input$Year)
-  print(input$statistic)
   
     Mortality_Filtered <- Total_Mortality_Data %>% 
       filterEqual("Year", input$Year) %>% 
