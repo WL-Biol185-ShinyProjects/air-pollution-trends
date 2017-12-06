@@ -2,11 +2,19 @@ library(shiny)
 library(tidyverse)
 library(ggplot2)
 library(readxl)
+library(dplyr)
 
 CountryDataClean <- read_excel("~/air-pollution-trends/CountryDataClean.xls")
 region <- read_excel("~/air-pollution-trends/CountryDataClean.xls")
 countryGEO <- rgdal:: readOGR("countries.geo.json", "OGRGeoJSON")
+airpollutiondata_clean <- read_excel("~/air-pollution-trends/airpollutiondata-clean.xlsx")
 
+filterEqual <- function(x, columnName, value) {
+  x[x[[columnName]] == value, ]
+}
+filterIn    <- function(x, columnName, values) {
+  x[x[[columnName]] %in% values, ]
+}
 
 function(input, output) {
   
@@ -54,33 +62,51 @@ function(input, output) {
                 multiple = TRUE)
   })
 
+#Plot with City Data and Table
+  output$country_city_plot <- renderPlot({
+    airpollutiondata_clean %>%
+      filterIn("Region", input$region) %>%
+      ggplot(aes(Country, `Annual mean ug/m3, PM10`, color = Region)) + geom_point()
+  })
   
- 
+  output$country_city_table <- renderDataTable({
+    airpollutiondata_clean %>%
+      filterIn("Region", input$region)
+  })
+
 #Heatmap for Mortality Incidence by Country, from Years 2000:2015
 
   output$Map_Mortality <- renderLeaflet({
     
-    
-
-Mortality_Filtered <- Total_Mortality_Data %>% 
-  filter_("Year" %in% input$Year) %>% 
-  gather(`statistic`, `incidence`, 4:11) %>% 
-  filter_('statistic' %in% input$statistic)
-
-countryGEO@data <- countryGEO@data %>%
-  left_join(Mortality_Filtered, by = c("name" = "Name"))
-
-pal <- colorNumeric("YlOrRd", c(0, 1247))
 leaflet(data = countryGEO) %>%
-  addTiles(options = tileOptions(noWrap = TRUE)) %>%
-  setView( lng = 0, lat = 0, zoom = 2) %>%
-  addPolygons(
-    fillColor = ~pal(incidence)
-    , weight = 5
-    , opacity = 0.1
-    , fillOpacity = 0.8
-  ) 
+  addProviderTiles("CartoDB.Positron", options = tileOptions(noWrap = TRUE)) %>%
+  setView( lng = 0, lat = 0, zoom = 2) 
+  })
 
+observe({
+  print(input$Year)
+  print(input$statistic)
+  
+    Mortality_Filtered <- Total_Mortality_Data %>% 
+      filterEqual("Year", input$Year) %>% 
+      gather(`statistic`, `incidence`, 4:11) %>% 
+      filterEqual("statistic", input$statistic)
+    
+  suppressWarnings(
+    countryGEO@data <- countryGEO@data %>%
+      left_join(Mortality_Filtered, by = c("name" = "Name")))
+    
+    pal <- colorBin("YlOrRd", c(0, 1247), bins = 4)
+    
+    leafletProxy("Map_Mortality", data = countryGEO) %>%
+      clearShapes() %>%
+      addPolygons(
+        fillColor = ~pal(as.numeric(incidence))
+        , weight = 1
+        , opacity = 0.1
+        , fillOpacity = 0.8
+      ) 
+      
   })
 
 }
