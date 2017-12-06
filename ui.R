@@ -37,12 +37,12 @@ dashboardPage(skin = "green",
                   "We also provide an interactive world map for you to explore mortality rates due to respiratory diseases.",
                     tags$br(),
                     tags$br(),
-                  "We utilized data made available from the World Health Organization (WHO) to create this application.",
-                    tags$br(),
-                    tags$br(),
-                    "The global population is rapidly growing and air pollution is becoming increasingly worse throughout the world. 
+                   "The global population is rapidly growing and air pollution is becoming increasingly worse throughout the world. 
                     As a result, we wanted to investigate possible relationships between air pollution severity and rates of mortality due to respiratory diseases. 
-                    Our goal is to provide easily accessible information regarding air pollution trends in a straightforward fashion."
+                    Our goal is to provide easily accessible information regarding air pollution trends in a straightforward fashion.",
+                    tags$br(),
+                    tags$br(),
+                  "We utilized data made available from the World Health Organization (WHO) to create this application."
                   )
               )),
       
