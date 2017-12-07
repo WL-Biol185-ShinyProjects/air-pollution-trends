@@ -102,7 +102,7 @@ leaflet(data = filteredCountryGEO()) %>%
     , weight = 1
     , opacity = 0.1
     , fillOpacity = 0.8
-  )
+  ) %>%
   addLegend(pal = pal,
             values = ~incidence,
             opacity = 0.1,
@@ -120,7 +120,7 @@ observe({
         , weight = 1
         , opacity = 0.1
         , fillOpacity = 0.8
-      ) 
+      ) %>%
     addLegend(pal = pal,
               values = ~incidence,
               opacity = 0.1,
