@@ -24,7 +24,7 @@ dashboardPage(skin = "green",
       tabItem(tabName = "home",
               fluidPage(
                 titlePanel("World Air Pollution and Respiratory Illness Trends"),
-                img(src = "airpollution.png",
+                img(src = "industry.png",
                     height = 300,
                     width = 400,
                     align = "center"),
@@ -142,7 +142,9 @@ dashboardPage(skin = "green",
             br(),
             a(href = "http://www.who.int/healthinfo/global_burden_disease/estimates/en/index1.html", "World Country Mortality Data"),
             br(),
-            a(href = "http://apps.who.int/gho/data/view.main.SDGPM25116v?lang=en", "World Country Air Pollution Data")
+            a(href = "http://apps.who.int/gho/data/view.main.SDGPM25116v?lang=en", "World Country Air Pollution Data"),
+            br(),
+            a(href = "https://pixabay.com/en/industry-sunrise-sky-air-pollution-1752876/", "Picture")
             
           )    
         )

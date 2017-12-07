@@ -121,6 +121,5 @@ observe({
 }
 
 
-bio185::copyErrorLogs()
 
 
