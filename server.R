@@ -78,27 +78,36 @@ function(input, output) {
 
 #Heatmap for Mortality Incidence by Country, from Years 2000:2015
 
-  output$Map_Mortality <- renderLeaflet({
-    
-leaflet(data = countryGEO) %>%
-  addProviderTiles("CartoDB.Positron", options = tileOptions(noWrap = TRUE)) %>%
-  setView( lng = 0, lat = 0, zoom = 2) 
-  })
-
-observe({
-  
+  filteredCountryGEO <- reactive({
     Mortality_Filtered <- Total_Mortality_Data %>% 
       filterEqual("Year", input$Year) %>% 
       gather(`statistic`, `incidence`, 4:11) %>% 
       filterEqual("statistic", input$statistic)
     
-  suppressWarnings(
-    countryGEO@data <- countryGEO@data %>%
-      left_join(Mortality_Filtered, by = c("name" = "Name")))
+    suppressWarnings(
+      countryGEO@data <- countryGEO@data %>%
+        left_join(Mortality_Filtered, by = c("name" = "Name")))
     
+    countryGEO
+  })
+  
+  output$Map_Mortality <- renderLeaflet({
+    pal <- colorBin("YlOrRd", c(0, 1247), bins = 4)     
+leaflet(data = filteredCountryGEO()) %>%
+  addProviderTiles("CartoDB.Positron", options = tileOptions(noWrap = TRUE)) %>%
+  setView( lng = 0, lat = 0, zoom = 2) %>%
+  addPolygons(
+    fillColor = ~pal(as.numeric(incidence))
+    , weight = 1
+    , opacity = 0.1
+    , fillOpacity = 0.8
+  )
+  })
+
+observe({
     pal <- colorBin("YlOrRd", c(0, 1247), bins = 4)
     
-    leafletProxy("Map_Mortality", data = countryGEO) %>%
+    leafletProxy("Map_Mortality", data = filteredCountryGEO()) %>%
       clearShapes() %>%
       addPolygons(
         fillColor = ~pal(as.numeric(incidence))
@@ -112,6 +121,6 @@ observe({
 }
 
 
-
+bio185::copyErrorLogs()
 
 
