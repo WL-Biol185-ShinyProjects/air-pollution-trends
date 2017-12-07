@@ -5,7 +5,7 @@ library(shinydashboard)
 library(htmltools)
 library(readxl)
 
-CountryDataClean <- read_excel("~/air-pollution-trends/CountryDataClean.xls")
+CountryDataClean <- read_excel("CountryDataClean.xls")
 
 
 dashboardPage(skin = "green",
