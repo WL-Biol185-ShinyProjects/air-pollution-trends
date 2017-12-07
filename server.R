@@ -122,7 +122,7 @@ observe({
         , fillOpacity = 0.8
       ) 
     addLegend(pal = pal,
-              values = incidence,
+              values = ~incidence,
               opacity = 0.1,
               title = NULL,
               position = "bottomright")
