@@ -8,6 +8,7 @@ CountryDataClean <- read_excel("~/air-pollution-trends/CountryDataClean.xls")
 region <- read_excel("~/air-pollution-trends/CountryDataClean.xls")
 countryGEO <- rgdal:: readOGR("countries.geo.json", "OGRGeoJSON")
 airpollutiondata_clean <- read_excel("~/air-pollution-trends/airpollutiondata-clean.xlsx")
+airpollutiondata_clean$`1854` = NULL
 
 filterEqual <- function(x, columnName, value) {
   x[x[[columnName]] == value, ]
@@ -92,7 +93,7 @@ function(input, output) {
   })
   
   output$Map_Mortality <- renderLeaflet({
-    pal <- colorBin("YlOrRd", c(0, 1247), bins = 4)     
+    pal <- colorBin("YlOrRd", c(0, 1247), bins = 30)     
 leaflet(data = filteredCountryGEO()) %>%
   addProviderTiles("CartoDB.Positron", options = tileOptions(noWrap = TRUE)) %>%
   setView( lng = 0, lat = 0, zoom = 2) %>%
@@ -105,7 +106,7 @@ leaflet(data = filteredCountryGEO()) %>%
   })
 
 observe({
-    pal <- colorBin("YlOrRd", c(0, 1247), bins = 4)
+    pal <- colorBin("YlOrRd", c(0, 1247), bins = 30)
     
     leafletProxy("Map_Mortality", data = filteredCountryGEO()) %>%
       clearShapes() %>%
@@ -121,6 +122,6 @@ observe({
 }
 
 
-bio185::copyErrorLogs()
+
 
 
