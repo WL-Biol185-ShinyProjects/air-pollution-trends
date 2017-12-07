@@ -34,7 +34,7 @@ dashboardPage(skin = "green",
                 h4("This app allows you to explore various data describing indicators of air pollution.  The data can be broken down by World Region, Country, and even City!",
                     tags$br(),
                     tags$br(),
-                  "We also provide an interactive world map for you to explore mortality rates due to respiratory diseases.",
+                  "We also provide an interactive world map for you to explore mortality rates due to respiratory diseases. You can select various different respiratory diseases and infections and see their mortality rates on the map. You can adjust the year by changing the slider bar. There is a play button on the slider bar which animates a timelapse of the rates over 15 years.",
                     tags$br(),
                     tags$br(),
                    "The global population is rapidly growing and air pollution is becoming increasingly worse throughout the world. 
