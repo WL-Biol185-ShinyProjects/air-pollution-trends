@@ -5,7 +5,7 @@ library(readxl)
 library(dplyr)
 
 CountryDataClean <- read_excel("CountryDataClean.xls")
-
+Total_Mortality_Data <- read_excel("Total_Mortality_Data.xlsx")
 countryGEO <- rgdal:: readOGR("countries.geo.json", "OGRGeoJSON")
 airpollutiondata_clean <- read_excel("airpollutiondata-clean.xlsx")
 airpollutiondata_clean$`1854` = NULL

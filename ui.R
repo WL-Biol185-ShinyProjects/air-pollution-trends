@@ -8,6 +8,7 @@ library(readxl)
 CountryDataClean <- read_excel("CountryDataClean.xls")
 airpollutiondata_clean <- read_excel("airpollutiondata-clean.xlsx")
 airpollutiondata_clean$`1854` = NULL
+Total_Mortality_Data <- read_excel("Total_Mortality_Data.xlsx")
 
 
 dashboardPage(skin = "green",
