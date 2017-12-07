@@ -12,7 +12,7 @@ Total_Mortality_Data <- read_excel("Total_Mortality_Data.xlsx")
 
 
 dashboardPage(skin = "green",
-  dashboardHeader(title ="Air Pollution and Respiratory Illness"),
+  dashboardHeader(title ="Air Pollution and Respiratory Illness", titleWidth = 350),
   dashboardSidebar(
     sidebarMenu(
       menuItem("Home", tabName = "home"),
